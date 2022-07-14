@@ -39,6 +39,7 @@ namespace swagger_jwt.Controllers
             var usuariosDTO = _mapper.Map<List<UsuarioDTO>>(usuarios);
             return usuariosDTO;
         }
+
         [Authorize]
 
         [HttpGet("{id}")]
