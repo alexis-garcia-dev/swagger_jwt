@@ -23,6 +23,6 @@ namespace swagger_jwt.Models
         public Producto producto { get; set; }
         public Bodega bodega { get; set; }
         public Usuario usuario { get; set; }
-        public Inventario inventario { get; set; }
+ 
     }
 }
