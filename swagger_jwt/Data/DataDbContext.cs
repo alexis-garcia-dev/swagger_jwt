@@ -14,5 +14,9 @@ namespace swagger_jwt.Data
 
         public DbSet<Usuario> usuario { get; set; }
         public DbSet<Producto> producto { get; set; }
+        public DbSet<Bodega> bodega { get; set; }
+        public DbSet<Entradas> entradas { get; set; }
+
+        public DbSet<Roles> roles { get; set; }
     }
 }
