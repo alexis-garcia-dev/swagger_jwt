@@ -36,5 +36,32 @@ namespace swagger_jwt.Controllers
 
             return Ok(response);
         }
+
+        [HttpPut]
+        public async Task<ActionResult<Bodega>> Put(Bodega bodega, int id)
+        {
+            var nombre = _DbContext.bodega.Where(c => c.Nombre == bodega.Nombre).FirstOrDefault();
+            if (nombre != null)
+            {
+                return BadRequest("Bodega ya Existe");
+            }
+
+            var rolActualizar = await _DbContext.bodega.Where(c => c.BodegaId == id).FirstOrDefaultAsync();
+            if (rolActualizar == null)
+            {
+                return NotFound("Bodega no Encontrada");
+            }
+            rolActualizar.Nombre = bodega.Nombre.ToUpper();
+            _DbContext.Entry(rolActualizar).State = EntityState.Modified;
+            await _DbContext.SaveChangesAsync();
+            var response = new
+            {
+                Status = "OK",
+                Message = "Bodega Actualizada",
+                Data = bodega
+            };
+
+            return Ok(response);
+        }
     }
 }
