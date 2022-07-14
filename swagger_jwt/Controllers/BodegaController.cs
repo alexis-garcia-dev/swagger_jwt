@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using swagger_jwt.Data;
+using swagger_jwt.Models;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,34 +23,18 @@ namespace swagger_jwt.Controllers
         }
         // GET: api/<BodegaController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<List<Bodega>>> GetAll()
         {
-            return new string[] { "value1", "value2" };
-        }
+            var roles = await _DbContext.bodega.Where(c => c.Estado == true).ToListAsync();
 
-        // GET api/<BodegaController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+            var response = new
+            {
+                Status = "OK",
+                Message = "Lista de Bodegas",
+                Data = roles
+            };
 
-        // POST api/<BodegaController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<BodegaController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<BodegaController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok(response);
         }
     }
 }
