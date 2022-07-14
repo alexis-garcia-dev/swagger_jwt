@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "swagger_jwt", "swagger_jwt\swagger_jwt.csproj", "{A3FF0232-EEE8-42CC-B2D1-92690E3AE7BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3FF0232-EEE8-42CC-B2D1-92690E3AE7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3FF0232-EEE8-42CC-B2D1-92690E3AE7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3FF0232-EEE8-42CC-B2D1-92690E3AE7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3FF0232-EEE8-42CC-B2D1-92690E3AE7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7327C7C8-CE15-41C3-A068-F3E962DF4CA3}
+	EndGlobalSection
+EndGlobal
