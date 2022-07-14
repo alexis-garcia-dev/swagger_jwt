@@ -9,7 +9,7 @@ namespace swagger_jwt.Models
         public int UsuarioId { get; set; }
         public int Cantidad { get; set; }
 
-        public ICollection<Entrada> entradas { get; set; }
+        public ICollection<Entradas> entradas { get; set; }
         public ICollection<Salida> salidas { get; set; }
     }
 }
