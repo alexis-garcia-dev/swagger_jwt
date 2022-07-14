@@ -1533,19 +1533,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
+    "C:\\Users\\Ismael\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\jwtDotnet\\swagger_jwt\\swagger_jwt\\swagger_jwt.csproj",
+      "projectUniqueName": "C:\\Users\\Ismael\\Desktop\\API\\swagger_jwt\\swagger_jwt\\swagger_jwt.csproj",
       "projectName": "swagger_jwt",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\jwtDotnet\\swagger_jwt\\swagger_jwt\\swagger_jwt.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\jwtDotnet\\swagger_jwt\\swagger_jwt\\obj\\",
+      "projectPath": "C:\\Users\\Ismael\\Desktop\\API\\swagger_jwt\\swagger_jwt\\swagger_jwt.csproj",
+      "packagesPath": "C:\\Users\\Ismael\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ismael\\Desktop\\API\\swagger_jwt\\swagger_jwt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ismael\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1614,7 +1614,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
