@@ -11,4 +11,4 @@ namespace swagger_jwt.Models
             public ICollection<Usuario> usuarios { get; set; }
         }
     }
-}
+

@@ -102,7 +102,7 @@ namespace swagger_jwt.Controllers
 
             return Ok(response);
         }
-        [HttpDelete("{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<Roles>> Delete(int id)
         {
             var rol = await _dbContext.roles.Where(c => c.RolesId == id).FirstOrDefaultAsync();

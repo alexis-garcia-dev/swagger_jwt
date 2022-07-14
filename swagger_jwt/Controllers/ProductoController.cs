@@ -20,7 +20,9 @@ namespace swagger_jwt.Controllers
         [HttpGet("getAll")]
         public IActionResult GetProd()
         {
-            return Ok(_DbContext.producto.ToArray());
+            var productos = _DbContext.producto.ToList();
+
+            return Ok(productos);
         }
 
         [HttpPost("InsertProd")]
