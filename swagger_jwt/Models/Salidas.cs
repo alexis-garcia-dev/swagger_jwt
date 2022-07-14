@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace swagger_jwt.Models
 {
-    public class Entradas
+    public class Salidas
     {
 
         [Key]
@@ -23,6 +23,7 @@ namespace swagger_jwt.Models
         public Producto producto { get; set; }
         public Bodega bodega { get; set; }
         public Usuario usuario { get; set; }
- 
+        
+
     }
 }
