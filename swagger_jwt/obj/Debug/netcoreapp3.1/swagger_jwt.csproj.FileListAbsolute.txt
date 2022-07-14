@@ -118,3 +118,13 @@ C:\Users\Usuario\Documents\jwtDotnet\swagger_jwt\swagger_jwt\obj\Debug\netcoreap
 C:\Users\Usuario\Documents\jwtDotnet\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.xml
 C:\Users\Usuario\Documents\jwtDotnet\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.pdb
 C:\Users\Usuario\Documents\jwtDotnet\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.genruntimeconfig.cache
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.AssemblyInfoInputs.cache
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.AssemblyInfo.cs
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.dll
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.xml
+C:\Users\Usuario\source\repos\swagger_jwt\swagger_jwt\obj\Debug\netcoreapp3.1\swagger_jwt.pdb
