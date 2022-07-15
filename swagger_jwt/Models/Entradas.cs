@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace swagger_jwt.Models
 {
@@ -16,8 +17,11 @@ namespace swagger_jwt.Models
 
         public DateTime FechaEntrada { get; set; }
 
-        public float Cantidad { get; set; }
-
+        public int Cantidad { get; set; }
+        /**
+         para evitar que se envie al front se usa JsonIgnore
+         */
+        [JsonIgnore]
         public float EntradaTotal { get; set; }
 
         public Producto producto { get; set; }

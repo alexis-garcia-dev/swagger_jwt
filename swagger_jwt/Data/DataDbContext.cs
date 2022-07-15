@@ -20,5 +20,7 @@ namespace swagger_jwt.Data
         public DbSet<Roles> roles { get; set; }
 
         public DbSet<Categoria> categoria { get; set; }
+
+        public DbSet<Inventario> inventario { get; set; }
     }
 }
