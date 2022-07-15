@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using swagger_jwt.Data;
 using swagger_jwt.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace swagger_jwt.Controllers
 {
@@ -15,17 +14,23 @@ namespace swagger_jwt.Controllers
     public class BodegaController : ControllerBase
     {
         private readonly DataDbContext _DbContext;
+        private readonly IMapper _mapper;
 
-        public BodegaController(DataDbContext dataDbContext)
+        public BodegaController(DataDbContext dataDbContext , IMapper mapper)
         {
             _DbContext = dataDbContext;
+            _mapper = mapper;
+
 
         }
+        
         // GET: api/<BodegaController>
         [HttpGet]
         public async Task<ActionResult<List<Bodega>>> GetAll()
         {
             var roles = await _DbContext.bodega.Where(c => c.Estado == true).ToListAsync();
+
+            
 
             var response = new
             {

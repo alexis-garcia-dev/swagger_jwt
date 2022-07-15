@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using swagger_jwt.Data;
+using swagger_jwt.DTO;
 using swagger_jwt.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +16,20 @@ namespace swagger_jwt.Controllers
     public class CategoriaController : ControllerBase
     {
         private readonly DataDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public CategoriaController(DataDbContext dbContext)
+        public CategoriaController(DataDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Categoria>>> GetAll()
         {
             var categorias = await _dbContext.categoria.Where(c => c.Estado == true).ToListAsync();
+
+            //var categoriasDTO = _mapper.Map<List<CategoriaDTO>>(categorias);
 
             var response = new
             {
@@ -55,13 +61,23 @@ namespace swagger_jwt.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Categoria>> Post(Categoria categoria)
+        public async Task<ActionResult<CategoriaDTO>> Post(CategoriaDTO categoriaDTO)
         {
             try
             {
+                var categoria = _mapper.Map<Categoria>(categoriaDTO);
                 _dbContext.categoria.Add(categoria);
                 await _dbContext.SaveChangesAsync();
-                return Ok(categoria);
+                var categorias = _mapper.Map<CategoriaDTO>(categoria);
+
+                var response = new
+                {
+                    Status = "OK",
+                    Message = "Categoria creada",
+                    Data = categorias
+                };
+            
+                return Ok(response);
             }
             catch (System.Exception ex)
             {
@@ -70,10 +86,11 @@ namespace swagger_jwt.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Categoria>> Put(int id, Categoria categoria)
+        public async Task<ActionResult<CategoriaDTO>> Put(int id, CategoriaDTO categoriaDTO)
         {
             try
             {
+                var categoria = _mapper.Map<Categoria>(categoriaDTO);
                 var categoriaDb = await _dbContext.categoria.Where(c => c.CategoriaId == id).FirstOrDefaultAsync();
                 if (categoriaDb == null)
                 {
@@ -81,7 +98,16 @@ namespace swagger_jwt.Controllers
                 }
                 categoriaDb.Nombre = categoria.Nombre;
                 await _dbContext.SaveChangesAsync();
-                return Ok(categoriaDb);
+                var categorias = _mapper.Map<CategoriaDTO>(categoria);
+                var response = new
+                {
+                    Status = "OK",
+                    Message = "Categoria creada",
+                    Data = categorias
+                };
+
+                return Ok(response);
+                //return Ok(categorias);
             }
             catch (System.Exception ex)
             {
@@ -89,7 +115,7 @@ namespace swagger_jwt.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Delete/{id}")]
         public async Task<ActionResult<Categoria>> Delete(int id)
         {
             try

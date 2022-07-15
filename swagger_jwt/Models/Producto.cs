@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace swagger_jwt.Models
 {
@@ -9,10 +10,13 @@ namespace swagger_jwt.Models
         [Key]
         public int ProductoId { get; set; }
         public string Nombre { get; set; }
-        public Categoria CategoriaId { get; set; }
+        public int CategoriaId { get; set; }
+        [ForeignKey("CategoriaId")]
+        public Categoria categoria { get; set; }
         public DateTime FechaCad { get; set; }
         public DateTime FechaProd { get; set; }
-        public int Precio { get; set; }
+        public float Precio { get; set; }
+        public bool Estado { get; set; } = true;
 
     }
 }

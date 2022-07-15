@@ -12,6 +12,8 @@ namespace swagger_jwt.Data
             CreateMap<Usuario, UsuarioDTO>().ReverseMap();
             CreateMap<Usuario, LoginDTO>().ReverseMap();
             CreateMap<Usuario, CreateUsuario>().ReverseMap();
+            CreateMap<Categoria,CategoriaDTO>().ReverseMap();
+            CreateMap<Producto, ProductoDTO>().ReverseMap();
 
         }
     }
