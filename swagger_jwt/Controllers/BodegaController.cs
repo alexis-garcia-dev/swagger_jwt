@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using swagger_jwt.Data;
+using swagger_jwt.DTO;
 using swagger_jwt.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,50 +24,88 @@ namespace swagger_jwt.Controllers
 
 
         }
-        
-        // GET: api/<BodegaController>
         [HttpGet]
         public async Task<ActionResult<List<Bodega>>> GetAll()
         {
-            var roles = await _DbContext.bodega.Where(c => c.Estado == true).ToListAsync();
-
-            
+            var bodegas = await _DbContext.bodega.Where(c => c.Estado == true).ToListAsync();
 
             var response = new
             {
                 Status = "OK",
                 Message = "Lista de Bodegas",
-                Data = roles
+                Data = bodegas
+            };
+
+            return Ok(response);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<Bodega>>> GetById(int id) {
+
+            var bodegas = await _DbContext.bodega.Where(c => c.BodegaId == id).FirstOrDefaultAsync();
+            
+            if (bodegas== null)
+            {
+                return NotFound("Bodega no encontrada");
+            }
+
+            var response = new
+            {
+                Status = "OK",
+                Message = "Id Bodega",
+                Data = bodegas
+            };
+
+            return Ok(response);
+        }
+        [HttpPost]
+        public async Task<ActionResult<BodegaDTO>> Post(BodegaDTO bodegaDTO)
+        {
+            var bodega = _mapper.Map<Bodega>(bodegaDTO);
+            _DbContext.bodega.Add(bodega);
+            await _DbContext.SaveChangesAsync();
+            var bodegas = _mapper.Map<BodegaDTO>(bodega);
+
+            var response = new
+            {
+                Status = "OK",
+                Message = "Bodega creada",
+                Data = bodegas
             };
 
             return Ok(response);
         }
 
         [HttpPut]
-        public async Task<ActionResult<Bodega>> Put(Bodega bodega, int id)
+
+        public async Task<ActionResult<BodegaDTO>> Put(BodegaDTO bodegaDTO,int id)
         {
-            var nombre = _DbContext.bodega.Where(c => c.Nombre == bodega.Nombre).FirstOrDefault();
-            if (nombre != null)
+            var bodega = _mapper.Map<Bodega>(bodegaDTO);
+            var categoriaconf = await _DbContext.bodega.Where(c => c.Estado == true && c.BodegaId==id).FirstOrDefaultAsync();
+
+            if (categoriaconf == null)
             {
-                return BadRequest("Bodega ya Existe");
+                return NotFound("Categoria no encontrada");
             }
 
-            var rolActualizar = await _DbContext.bodega.Where(c => c.BodegaId == id).FirstOrDefaultAsync();
-            if (rolActualizar == null)
-            {
-                return NotFound("Bodega no Encontrada");
-            }
-            rolActualizar.Nombre = bodega.Nombre.ToUpper();
-            _DbContext.Entry(rolActualizar).State = EntityState.Modified;
+            categoriaconf.Nombre = bodegaDTO.Nombre.ToUpper();
             await _DbContext.SaveChangesAsync();
+            var bodegas = _mapper.Map<BodegaDTO>(bodega);
+
             var response = new
             {
                 Status = "OK",
-                Message = "Bodega Actualizada",
-                Data = bodega
+                Message = "Bodega actualizada",
+                Data = bodegas
             };
 
             return Ok(response);
         }
+
+
+
+
+
+
+
     }
 }
