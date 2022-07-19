@@ -7,7 +7,9 @@ namespace swagger_jwt.Models
     public class Entradas
     {
 
+
         [Key]
+
         public int EntradaId { get; set; }
         public int ProductoId { get; set; }
 
@@ -23,9 +25,11 @@ namespace swagger_jwt.Models
          */
         [JsonIgnore]
         public float EntradaTotal { get; set; }
-
+        [JsonIgnore]
         public Producto producto { get; set; }
+        [JsonIgnore]
         public Bodega bodega { get; set; }
+        [JsonIgnore]
         public Usuario usuario { get; set; }
  
     }

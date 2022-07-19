@@ -25,14 +25,14 @@ namespace swagger_jwt.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Entradas>>> Getentradas()
         {
-            return await _context.entradas.ToListAsync();
+            return await _context.entrada.ToListAsync();
         }
 
         // GET: api/Entradas/5
         [HttpGet("GetById")]
         public async Task<ActionResult<Entradas>> GetEntradas(int id)
         {
-            var entradas = await _context.entradas.FindAsync(id);
+            var entradas = await _context.entrada.FindAsync(id);
 
             if (entradas == null)
             {
@@ -85,18 +85,47 @@ namespace swagger_jwt.Controllers
             var existeProd = _context.producto.Where(t => t.ProductoId == entradas.ProductoId).FirstOrDefault();
             var existeBodega = _context.bodega.Where(t => t.BodegaId == entradas.BodegaId).FirstOrDefault();
             var existeUsuario = _context.usuario.Where(t => t.UsuarioId == entradas.UsuarioId).FirstOrDefault();
+            
+            //var entradaexist = _context.entrada.Where(t => t.ProductoId == entradas.ProductoId).FirstOrDefault();
 
             var precio = existeProd.Precio;
-
             entradas.EntradaTotal = precio * entradas.Cantidad;
+            
 
             if (existeProd != null && existeBodega != null && existeUsuario != null)
             {
-                _context.entradas.Add(entradas);
+                _context.entrada.Add(entradas);
 
-                _context.SaveChangesAsync();
-            }          
+                _context.SaveChanges();
+            }
 
+            var existeInventario = _context.inventario.Where(t => t.ProductoId == entradas.ProductoId).FirstOrDefault();
+
+            if (existeInventario != null)
+            {
+                existeInventario.Cantidad = existeInventario.Cantidad + entradas.Cantidad;
+                existeInventario.ProductoId = entradas.ProductoId;
+                existeInventario.UsuarioId = entradas.UsuarioId;
+
+                _context.Update(existeInventario);
+
+                _context.SaveChanges();
+            }
+
+            if (existeInventario == null)
+            {
+                Inventario inv = new Inventario();
+
+                inv.Cantidad = entradas.Cantidad;
+                inv.ProductoId = entradas.ProductoId;
+                inv.UsuarioId = entradas.UsuarioId;
+
+                _context.inventario.Add(inv);
+
+                _context.SaveChanges();
+            }
+                      
+           
             return CreatedAtAction("GetEntradas", new { id = entradas.EntradaId }, entradas);
 
             /**** PostCantidadEntradas(entradas, existeProd);*/
@@ -104,14 +133,12 @@ namespace swagger_jwt.Controllers
 
         // DELETE: api/Entradas/5
 
-        /**
-        public IActionResult PostCantidadEntradas(Entradas entParam, Producto existeProd)
+
+        /*public IActionResult PostCantidadEntradas(Entradas entParam, Producto existeProd)
         {
-            var existeInv = _context.inventario.Where(t => t.InventarioId == entParam.).FirstOrDefault();
             
-             * estos campos se llenaran con los datos y luego se persistiran en cada tabla
+             /* estos campos se llenaran con los datos y luego se persistiran en cada tabla
              
-            var inv = _context.inventario.Where(t => t.InventarioId == idInv).FirstOrDefault();
             
             if (inv != null)
             {
@@ -123,9 +150,9 @@ namespace swagger_jwt.Controllers
             return Ok("ok");
 
         }
-            */
+            
 
-
+         **/
 
 
 
@@ -134,13 +161,13 @@ namespace swagger_jwt.Controllers
         [HttpDelete("Delete")]
         public async Task<ActionResult<Entradas>> DeleteEntradas(int id)
         {
-            var entradas = await _context.entradas.FindAsync(id);
+            var entradas = await _context.entrada.FindAsync(id);
             if (entradas == null)
             {
                 return NotFound();
             }
 
-            _context.entradas.Remove(entradas);
+            _context.entrada.Remove(entradas);
             await _context.SaveChangesAsync();
 
             return entradas;
@@ -148,7 +175,7 @@ namespace swagger_jwt.Controllers
 
         private bool EntradasExists(int id)
         {
-            return _context.entradas.Any(e => e.EntradaId == id);
+            return _context.entrada.Any(e => e.EntradaId == id);
         }
     }
 }

@@ -4,5 +4,8 @@
         <name>swagger_jwt</name>
     </assembly>
     <members>
+        <member name="P:swagger_jwt.Models.Entradas.EntradaTotal">
+                     para evitar que se envie al front se usa JsonIgnore
+        </member>
     </members>
 </doc>
