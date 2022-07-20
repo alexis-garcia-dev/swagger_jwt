@@ -95,17 +95,29 @@ namespace swagger_jwt.Controllers
             
             salidas.VentaTotal = precio * salidas.Cantidad + ganancia + iva;
 
+            var response = new
+            {
+                Status = "error",
+                Message = "ha ingresado un producto, usuario o bodega invalida",
+                Data = salidas
+            };
+                        
+                //se obtiene la la cantidad de producto en inventario
+                var existencia = existeinv.Cantidad;
 
-            //se obtiene la la cantidad de producto en inventario
-            var existencia = existeinv.Cantidad;
+            if (existencia == 0)
+            {
+                return NotFound("No hay productos en inventario");
+            }
 
-            if (existeProd != null && existeBodega != null && existeUsuario != null && salidas.Cantidad <= existencia)
+            try
+            {
+                if (existeProd != null && existeBodega != null && existeUsuario != null && salidas.Cantidad <= existencia)
             {
                 _context.salida.Add(salidas);
                 _context.SaveChanges();
             }
-            try
-            {
+           
                 if (existeinv != null && salidas.Cantidad <= existencia)
                 {
                     existeinv.Cantidad = existeinv.Cantidad - salidas.Cantidad;
@@ -118,9 +130,9 @@ namespace swagger_jwt.Controllers
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine("Error de validacion", e);
+                throw new Exception("error");
             }
 
 

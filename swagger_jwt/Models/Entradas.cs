@@ -18,6 +18,8 @@ namespace swagger_jwt.Models
         public DateTime FechaEntrada { get; set; }
 
         public int Cantidad { get; set; }
+        [JsonIgnore]
+        public bool estado { get; set; }
         /**
          para evitar que se envie al front se usa JsonIgnore
          */

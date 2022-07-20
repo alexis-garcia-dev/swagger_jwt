@@ -23,23 +23,49 @@ namespace swagger_jwt.Controllers
 
         // GET: api/Entradas
         [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<Entradas>>> Getentradas()
+        public IActionResult GetEntradas()
+
         {
-            return await _context.entrada.ToListAsync();
+            var productos = _context.entrada.Where(c => c.estado == true).ToListAsync();
+
+            var response = new
+            {
+                Status = "OK",
+                Message = "Lista de todas las Entradas activas",
+                Data = productos
+            };
+
+            return Ok(response);
         }
 
         // GET: api/Entradas/5
         [HttpGet("GetById")]
         public async Task<ActionResult<Entradas>> GetEntradas(int id)
         {
-            var entradas = await _context.entrada.FindAsync(id);
+            var entrada = await _context.entrada.Where(c => c.EntradaId == id).FirstOrDefaultAsync();
 
-            if (entradas == null)
+            
+            if (entrada != null)
+                {
+
+                  if (entrada.estado != true)
+                    {
+                        return NotFound("Producto borrado");
+                    }
+                }
+            if (entrada == null)
             {
-                return NotFound();
+                return NotFound("Entrada vacia");
             }
 
-            return entradas;
+                var response = new
+            {
+                Status = "OK",
+                Message = "Id Producto",
+                Data = entrada
+            };
+
+            return Ok(response);
         }
 
         // PUT: api/Entradas/5
@@ -90,7 +116,7 @@ namespace swagger_jwt.Controllers
 
             var precio = existeProd.Precio;
             entradas.EntradaTotal = precio * entradas.Cantidad;
-            
+            entradas.estado = true;
 
             if (existeProd != null && existeBodega != null && existeUsuario != null)
             {
@@ -130,7 +156,7 @@ namespace swagger_jwt.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error de validacion", e);
+                throw new Exception("error");
             }
 
 
@@ -149,18 +175,21 @@ namespace swagger_jwt.Controllers
 
         // DELETE: api/Entradas/5
         [HttpDelete("Delete")]
-        public async Task<ActionResult<Entradas>> DeleteEntradas(int id)
+        
+        public IActionResult DeleteEntradas(int id)
         {
-            var entradas = await _context.entrada.FindAsync(id);
+            var entradas = _context.entrada.Find(id);
             if (entradas == null)
             {
                 return NotFound();
             }
 
-            _context.entrada.Remove(entradas);
-            await _context.SaveChangesAsync();
+            entradas.estado = false;
 
-            return entradas;
+            _context.entrada.Update(entradas);
+            _context.SaveChanges();
+
+            return CreatedAtAction("GetEntradas", new { id = entradas.EntradaId }, entradas); ;
         }
 
         private bool EntradasExists(int id)
