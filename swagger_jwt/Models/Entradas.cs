@@ -7,9 +7,8 @@ namespace swagger_jwt.Models
     public class Entradas
     {
 
-
+        [JsonIgnore]
         [Key]
-
         public int EntradaId { get; set; }
         public int ProductoId { get; set; }
 

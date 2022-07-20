@@ -45,7 +45,7 @@ namespace swagger_jwt.Controllers
         // PUT: api/Entradas/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("Update")]
+        /**[HttpPut("Update")]
         public async Task<IActionResult> PutEntradas(int id, Entradas entradas)
         {
             if (id != entradas.EntradaId)
@@ -73,7 +73,7 @@ namespace swagger_jwt.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Entradas
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -101,6 +101,9 @@ namespace swagger_jwt.Controllers
 
             var existeInventario = _context.inventario.Where(t => t.ProductoId == entradas.ProductoId).FirstOrDefault();
 
+
+            try
+            {              
             if (existeInventario != null)
             {
                 existeInventario.Cantidad = existeInventario.Cantidad + entradas.Cantidad;
@@ -112,7 +115,7 @@ namespace swagger_jwt.Controllers
                 _context.SaveChanges();
             }
 
-            if (existeInventario == null)
+            if (existeInventario == null && existeProd != null)
             {
                 Inventario inv = new Inventario();
 
@@ -124,8 +127,13 @@ namespace swagger_jwt.Controllers
 
                 _context.SaveChanges();
             }
-                      
-           
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error de validacion", e);
+            }
+
+
             return CreatedAtAction("GetEntradas", new { id = entradas.EntradaId }, entradas);
 
             /**** PostCantidadEntradas(entradas, existeProd);*/
@@ -134,25 +142,7 @@ namespace swagger_jwt.Controllers
         // DELETE: api/Entradas/5
 
 
-        /*public IActionResult PostCantidadEntradas(Entradas entParam, Producto existeProd)
-        {
-            
-             /* estos campos se llenaran con los datos y luego se persistiran en cada tabla
-             
-            
-            if (inv != null)
-            {
-                inv.Cantidad = inv.Cantidad + entParam.Cantidad;
-                _context.inventario.Update(inv);
-                _context.SaveChanges();
-            }
-
-            return Ok("ok");
-
-        }
-            
-
-         **/
+        
 
 
 

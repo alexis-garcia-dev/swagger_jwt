@@ -4,6 +4,8 @@
         <name>swagger_jwt</name>
     </assembly>
     <members>
+        <!-- Badly formed XML comment ignored for member "M:swagger_jwt.Controllers.EntradasController.PostEntradas(swagger_jwt.Models.Entradas)" -->
+        <!-- Badly formed XML comment ignored for member "M:swagger_jwt.Controllers.SalidasController.PostSalidas(swagger_jwt.Models.Salidas)" -->
         <member name="P:swagger_jwt.Models.Entradas.EntradaTotal">
                      para evitar que se envie al front se usa JsonIgnore
         </member>

@@ -23,6 +23,6 @@ namespace swagger_jwt.Data
 
         public DbSet<Inventario> inventario { get; set; }
 
-        public DbSet<Salidas> salidas { get; set; }
+        public DbSet<Salidas> salida { get; set; }
     }
 }
