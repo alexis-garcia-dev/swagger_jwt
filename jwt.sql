@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2022 a las 19:06:49
--- Versión del servidor: 10.4.18-MariaDB
--- Versión de PHP: 7.4.16
+-- Tiempo de generación: 20-07-2022 a las 19:14:49
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,8 +41,7 @@ INSERT INTO `bodega` (`BodegaId`, `Nombre`, `Estado`) VALUES
 (1, 'BODEGA10', 1),
 (2, 'BodegaDos', 1),
 (3, 'bodega3', 1),
-(4, 'store', 1),
-(5, 'string', 1);
+(4, 'store', 1);
 
 -- --------------------------------------------------------
 
@@ -76,8 +75,9 @@ CREATE TABLE `entrada` (
   `BodegaId` int(11) NOT NULL,
   `UsuarioId` int(11) NOT NULL,
   `FechaEntrada` date NOT NULL,
-  `Cantidad` float NOT NULL,
-  `EntradaTotal` float NOT NULL
+  `Cantidad` int(11) NOT NULL,
+  `EntradaTotal` float NOT NULL,
+  `entrada` tinytext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -115,7 +115,7 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`ProductoId`, `Nombre`, `CategoriaId`, `FechaCad`, `FechaProd`, `Precio`, `Estado`) VALUES
 (1, 'Acetaminofen', 1, '2022-07-31', '2022-07-01', 23.1, 1),
-(3, 'crema', 1, '2022-07-15', '2022-07-15', 120, 1);
+(3, 'crema', 1, '2022-07-15', '2022-07-15', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -135,10 +135,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`RolesId`, `Nombre`, `Estado`) VALUES
 (8, 'USER', 0),
-(9, 'ADMINISTRADOR', 1),
-(10, 'string', 1),
-(11, 'USER2', 1),
-(12, 'SELLER', 1);
+(9, 'ADMINISTRADOR', 1);
 
 -- --------------------------------------------------------
 
@@ -152,6 +149,7 @@ CREATE TABLE `salida` (
   `UsuarioId` int(11) NOT NULL,
   `FechaSalida` date NOT NULL,
   `Precio` float NOT NULL,
+  `Cantidad` int(11) NOT NULL,
   `VentaTotal` float NOT NULL,
   `BodegaId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -180,8 +178,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`UsuarioId`, `RolesId`, `Name`, `LastName`, `Email`, `Password`, `Address`, `UserName`, `Phone`, `Estado`) VALUES
-(8, 10, 'pruvas', 'ves', 'alex@gmail.com', '$2a$11$Vuj64peoPOoFYq/fcN8Nr.LxtGycnQyj3m3gkmLF.9PuOgPeyFsEq', '87364', 'prueva', '7523537', 1),
-(10, 10, 'alexis202', 'garcia', 'sv@gmail.com', '$2a$11$iXRYElXc.ZGVLwo4EPhUjuuZo6mHTZWcg5bACvcTO23na9MJiUjxW', 'sv sv', 'alexissv', '76374', 1);
+(15, 9, 'Carlitos', 'Montoya', 'kek@gmail.com', '$2a$11$xRAEpYjLahyeg.F89ShxnOojV9MYQi37LfP/MITU/bx9ycxAul6Pu', 'calle wowow', 'kek123', '71715372', 1);
 
 --
 -- Índices para tablas volcadas
@@ -253,7 +250,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `bodega`
 --
 ALTER TABLE `bodega`
-  MODIFY `BodegaId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `BodegaId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -265,7 +262,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `entrada`
 --
 ALTER TABLE `entrada`
-  MODIFY `EntradaId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `EntradaId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
@@ -277,13 +274,13 @@ ALTER TABLE `inventario`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `ProductoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ProductoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `RolesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `RolesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `salida`
@@ -295,7 +292,7 @@ ALTER TABLE `salida`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `UsuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `UsuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
